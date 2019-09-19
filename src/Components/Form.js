@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const teamForm = props => {
+const Form = props => {
   const [teamForm, setTeamForm] = useState({
     name: "",
     company: "",
@@ -11,17 +11,18 @@ const teamForm = props => {
     setTeamForm({ ...teamForm, [event.target.name]: event.target.value });
   };
   const submitForm = event => {
+    console.log(event.target);
     event.preventDefault();
-    const newTeamForm = {
-      ...teamForm,
-      id: Date.now()
+    const newTeamMember = {
+      ...teamForm
     };
-    props.addNewTeamForm(newTeamForm);
+    console.log(newTeamMember);
+    props.addNewMember(newTeamMember);
     setTeamForm({ name: "", company: "", language: "" });
   };
 
   return (
-    <form onSubmit={e => submitForm(e)}>
+    <form onSubmit={submitForm}>
       <label htmlFor="name">name label </label>
       <input
         type="text"
@@ -43,7 +44,8 @@ const teamForm = props => {
         value={teamForm.language}
         onChange={changeHandler}
       />
+      <button type="submit"> sub</button>
     </form>
   );
 };
-export default teamForm;
+export default Form;
